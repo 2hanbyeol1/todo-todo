@@ -1,3 +1,38 @@
+/* theme */
+div.light {
+  --gray-2: #e9ecef;
+  --gray-3: #ced4da;
+  --gray-4: #868e96;
+}
+div.blue {
+  --main-1: #e7f5ff;
+  --main-2: #a5d8ff;
+  --main-3: #4dabf7;
+  --main-4: #228be6;
+  --main-5: #1971c2;
+}
+div.yellow {
+  --main-1: #fff9db;
+  --main-2: #ffec99;
+  --main-3: #ffd43b;
+  --main-4: #fab005;
+  --main-5: #fab005;
+}
+div.pink {
+  --main-1: #fff5f5;
+  --main-2: #ffc9c9;
+  --main-3: #ff8787;
+  --main-4: #fa5252;
+  --main-5: #e03131;
+}
+div.green {
+  --main-1: #ebfbee;
+  --main-2: #b2f2bb;
+  --main-3: #69db7c;
+  --main-4: #40c057;
+  --main-5: #2f9e44;
+}
+
 #root {
   display: flex;
   justify-content: center;
@@ -7,11 +42,12 @@
 #container {
   width: 1200px;
   height: 800px;
-  padding: 0 0.5rem;
+  padding: 0 2rem;
 }
 
 input {
   outline: 0;
+  font-size: 100%;
 }
 
 button {

@@ -1,8 +1,11 @@
-export const THEME = {
+export const COLOR = {
   BLUE: "blue",
   YELLOW: "yellow",
   PINK: "pink",
   GREEN: "green",
 };
 
-export default THEME;
+export const MODE = {
+  DARK: "dark",
+  LIGHT: "light",
+};
