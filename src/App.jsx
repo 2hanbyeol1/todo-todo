@@ -2,8 +2,9 @@ import { useRef, useState } from "react";
 import "./App.css";
 import WaveAudio from "./assets/audio/wave.mp3";
 import SettingImage from "./assets/img/settings.png";
-import Modal from "./components/Modal";
-import Todo from "./components/Todo";
+import Modal from "./components/modal/Modal";
+import Todo from "./components/todo/Todo";
+import Wave from "./components/wave/Wave";
 import { COLOR } from "./constants/theme";
 
 const App = () => {
@@ -12,8 +13,6 @@ const App = () => {
   });
   const [todos, setTodos] = useState([]);
   const [settingModal, setSettingModal] = useState(false);
-
-  const audioRef = useRef();
 
   // todo
   const addTodo = (e) => {
@@ -41,9 +40,9 @@ const App = () => {
   const showModal = () => setSettingModal(true);
   const closeModal = () => setSettingModal(false);
 
-  // audio
-  const playAudio = () => audioRef.current.play();
-  const stopAudio = () => audioRef.current.pause();
+  // theme
+  const setNewColorTheme = (newColor) =>
+    setTheme({ ...theme, color: newColor });
 
   const working_todos = todos.filter((todo) => !todo.isDone);
   const done_todos = todos.filter((todo) => todo.isDone);
@@ -51,40 +50,12 @@ const App = () => {
 
   return (
     <div className={`app ${theme.color}`}>
-      <audio ref={audioRef} src={WaveAudio} loop></audio>
-      <div
-        style={{ transform: `translateY(${-75 * (1 - done_rate)}%)` }}
-        className="wave-wrap"
-      >
-        <div className="wave"></div>
-      </div>
-      {settingModal ? (
-        <Modal title="🔨 설정" closeModal={closeModal}>
-          <div className="setting-content">
-            <div className="theme-sound">
-              <h4>배경 음악</h4>
-              <div className="setting-options">
-                <button onClick={playAudio}>ON</button>
-                <button onClick={stopAudio}>OFF</button>
-              </div>
-            </div>
-            <div className="theme-colors">
-              <h4>색상</h4>
-              <div className="setting-options">
-                {Object.values(COLOR).map((c, i) => (
-                  <button
-                    key={i}
-                    className={c}
-                    onClick={() => setTheme({ ...theme, color: c })}
-                  ></button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </Modal>
-      ) : (
-        <></>
-      )}
+      <Wave done_rate={done_rate} />
+      <SettingModal
+        visible={settingModal}
+        closeModal={closeModal}
+        setNewColorTheme={setNewColorTheme}
+      />
       <header className="header">
         <span style={{ width: "1.5rem" }}></span>
         <span>{`📆 ${
@@ -109,44 +80,93 @@ const App = () => {
           <button className="todo-submit-btn">등록</button>
         </form>
         {/* working section */}
-        <section>
-          <h3>✏️ working</h3>
-          <div className="todo-list">
-            {working_todos.length === 0 ? (
-              <span>작업 중인 일이 없습니다.</span>
-            ) : (
-              working_todos.map((todo) => (
-                <Todo
-                  key={todo.id}
-                  todo={todo}
-                  toggleTodo={toggleTodo}
-                  deleteTodo={deleteTodo}
-                />
-              ))
-            )}
-          </div>
-        </section>
-        {/* done section */}
-        <section id="done-section">
-          <h3>✅ done</h3>
-          <div className="todo-list">
-            {done_todos.length === 0 ? (
-              <span>완료된 일이 없습니다.</span>
-            ) : (
-              done_todos.map((todo) => (
-                <Todo
-                  key={todo.id}
-                  todo={todo}
-                  toggleTodo={toggleTodo}
-                  deleteTodo={deleteTodo}
-                  checked
-                />
-              ))
-            )}
-          </div>
-        </section>
+        <TodoSection
+          title="✏️ working"
+          todos={working_todos}
+          toggleTodo={toggleTodo}
+          deleteTodo={deleteTodo}
+        />
+        <TodoSection
+          id="done-section"
+          title="✅ done"
+          todos={done_todos}
+          toggleTodo={toggleTodo}
+          deleteTodo={deleteTodo}
+          checked
+        />
       </main>
     </div>
+  );
+};
+
+const TodoSection = ({
+  id = "",
+  title,
+  todos,
+  toggleTodo,
+  deleteTodo,
+  checked,
+}) => {
+  return (
+    <section id={id}>
+      <h3>{title}</h3>
+      <div className="todo-list">
+        {todos.length === 0 ? (
+          <span>-</span>
+        ) : (
+          todos.map((todo) => (
+            <Todo
+              key={todo.id}
+              todo={todo}
+              toggleTodo={toggleTodo}
+              deleteTodo={deleteTodo}
+              checked={checked}
+            />
+          ))
+        )}
+      </div>
+    </section>
+  );
+};
+
+const SettingModal = ({ visible, closeModal, setNewColorTheme }) => {
+  const audioRef = useRef();
+
+  // audio
+  const playAudio = () => audioRef.current.play();
+  const stopAudio = () => audioRef.current.pause();
+
+  return (
+    <>
+      <audio ref={audioRef} src={WaveAudio} loop></audio>
+      {visible ? (
+        <Modal title="🔨 설정" closeModal={closeModal}>
+          <div className="setting-content">
+            <div className="theme-sound">
+              <h4>배경 음악</h4>
+              <div className="setting-options">
+                <button onClick={playAudio}>ON</button>
+                <button onClick={stopAudio}>OFF</button>
+              </div>
+            </div>
+            <div className="theme-colors">
+              <h4>색상</h4>
+              <div className="setting-options">
+                {Object.values(COLOR).map((c, i) => (
+                  <button
+                    key={i}
+                    className={c}
+                    onClick={() => setNewColorTheme(c)}
+                  ></button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Modal>
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
 

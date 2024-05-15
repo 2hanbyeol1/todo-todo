@@ -1,4 +1,4 @@
-import CloseImage from "../assets/img/close.png";
+import CloseImage from "../../assets/img/close.png";
 import "./Modal.css";
 
 const Modal = ({ title, children, closeModal }) => {

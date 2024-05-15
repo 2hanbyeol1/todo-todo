@@ -1,4 +1,4 @@
-import TrashImage from "../assets/img/trash.png";
+import XImage from "../../assets/img/x.png";
 import "./Todo.css";
 
 const Todo = ({ todo, toggleTodo, deleteTodo, checked }) => {
@@ -15,7 +15,7 @@ const Todo = ({ todo, toggleTodo, deleteTodo, checked }) => {
         <span className="content">{todo.content}</span>
       </label>
       <button onClick={() => deleteTodo(todo.id)}>
-        <img className="del-btn" src={TrashImage} alt="삭제 버튼 이미지" />
+        <img className="del-btn" src={XImage} alt="삭제 버튼 이미지" />
       </button>
     </div>
   );
