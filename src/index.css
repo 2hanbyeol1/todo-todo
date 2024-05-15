@@ -47,6 +47,10 @@
     brightness(91%) contrast(88%);
 }
 
+* {
+  cursor: url("./assets/img/fish.png") 12 12, auto !important;
+}
+
 #root {
   display: flex;
   justify-content: center;
