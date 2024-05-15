@@ -51,6 +51,15 @@
   cursor: url("./assets/img/fish.png") 12 12, auto !important;
 }
 
+::-moz-selection {
+  background: var(--main-5);
+  color: var(--gray-1);
+}
+::selection {
+  background: var(--main-5);
+  color: var(--gray-1);
+}
+
 #root {
   display: flex;
   justify-content: center;
