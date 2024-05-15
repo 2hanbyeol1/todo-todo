@@ -151,7 +151,7 @@ const SettingModal = ({ visible, closeModal, setNewColorTheme }) => {
               </div>
             </div>
             <div className="theme-colors">
-              <h4>색상</h4>
+              <h4>테마 색상</h4>
               <div className="setting-options">
                 {Object.values(COLOR).map((c, i) => (
                   <button

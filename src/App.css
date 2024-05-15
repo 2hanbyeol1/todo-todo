@@ -111,11 +111,17 @@
 .app .setting-content > div h4 {
   font-size: 1.1rem;
 }
+.app .setting-content .theme-sound button:hover {
+  color: var(--main-4);
+}
 .app .setting-content .theme-colors button {
   display: inline-block;
-  width: 1rem;
-  height: 1rem;
+  width: 1.3rem;
+  height: 1.3rem;
   background-color: var(--main-2);
+}
+.app .setting-content .theme-colors button:hover {
+  background-color: var(--main-4);
 }
 .app .setting-content .setting-options {
   display: flex;
