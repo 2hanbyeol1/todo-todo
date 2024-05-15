@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import SettingImage from "./assets/settings.png";
 import Todo from "./components/Todo";
-import { COLOR, MODE } from "./constants/theme.js";
+import { COLOR, MODE } from "./constants/theme";
 
 const App = () => {
   const [theme, setTheme] = useState({ color: COLOR.BLUE, mode: MODE.LIGHT });
