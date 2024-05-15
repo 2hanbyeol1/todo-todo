@@ -1,4 +1,4 @@
-import TrashImage from "../assets/trash.png";
+import TrashImage from "../assets/img/trash.png";
 import "./Todo.css";
 
 const Todo = ({ todo, toggleTodo, deleteTodo, checked }) => {

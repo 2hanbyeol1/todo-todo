@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
-import SettingImage from "./assets/settings.png";
+import WaveAudio from "./assets/audio/wave.mp3";
+import SettingImage from "./assets/img/settings.png";
+import Modal from "./components/Modal";
 import Todo from "./components/Todo";
-import { COLOR, MODE } from "./constants/theme";
+import { COLOR } from "./constants/theme";
 
 const App = () => {
-  const [theme, setTheme] = useState({ color: COLOR.BLUE, mode: MODE.LIGHT });
+  const [theme, setTheme] = useState({
+    color: COLOR.BLUE,
+  });
   const [todos, setTodos] = useState([]);
+  const [settingModal, setSettingModal] = useState(false);
 
-  const working_todos = todos.filter((todo) => !todo.isDone);
-  const done_todos = todos.filter((todo) => todo.isDone);
+  const audioRef = useRef();
 
+  // todo
   const addTodo = (e) => {
     e.preventDefault();
     const id = todos.length > 0 ? todos[todos.length - 1].id + 1 : 0;
@@ -20,7 +25,6 @@ const App = () => {
     ]);
     e.target.content.value = "";
   };
-
   const toggleTodo = (id) => {
     const newTodos = todos.map((todo) => ({
       ...todo,
@@ -28,20 +32,58 @@ const App = () => {
     }));
     setTodos(newTodos);
   };
-
   const deleteTodo = (id) => {
     const newTodos = todos.filter((todo) => todo.id !== id);
     setTodos(newTodos);
   };
 
+  // modal
+  const showModal = () => setSettingModal(true);
+  const closeModal = () => setSettingModal(false);
+
+  // audio
+  const playAudio = () => audioRef.current.play();
+  const stopAudio = () => audioRef.current.pause();
+
+  const working_todos = todos.filter((todo) => !todo.isDone);
+  const done_todos = todos.filter((todo) => todo.isDone);
+
   return (
-    <div className={`app ${theme.color} ${theme.mode}`}>
+    <div className={`app ${theme.color}`}>
+      <audio ref={audioRef} src={WaveAudio} loop></audio>
+      {settingModal ? (
+        <Modal title="🔨 설정" closeModal={closeModal}>
+          <div className="setting-content">
+            <div className="theme-sound">
+              <h4>배경 음악</h4>
+              <div className="setting-options">
+                <button onClick={playAudio}>ON</button>
+                <button onClick={stopAudio}>OFF</button>
+              </div>
+            </div>
+            <div className="theme-colors">
+              <h4>색상</h4>
+              <div className="setting-options">
+                {Object.values(COLOR).map((c, i) => (
+                  <button
+                    key={i}
+                    className={c}
+                    onClick={() => setTheme({ ...theme, color: c })}
+                  ></button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Modal>
+      ) : (
+        <></>
+      )}
       <header className="header">
         <span style={{ width: "1.5rem" }}></span>
         <span>{`📆 ${
           new Date().getMonth() + 1
         }월 ${new Date().getDate()}일`}</span>
-        <button>
+        <button onClick={showModal}>
           <img
             className="header-setting-img"
             src={SettingImage}

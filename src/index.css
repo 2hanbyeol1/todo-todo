@@ -1,36 +1,50 @@
 /* theme */
-div.light {
+:root {
+  --gray-1: #f8f9fa;
   --gray-2: #e9ecef;
   --gray-3: #ced4da;
   --gray-4: #868e96;
 }
-div.blue {
+.dark {
+  --gray-4: #e9ecef;
+  --gray-3: #ced4da;
+  --gray-2: #868e96;
+}
+.blue {
   --main-1: #e7f5ff;
   --main-2: #a5d8ff;
   --main-3: #4dabf7;
   --main-4: #228be6;
   --main-5: #1971c2;
+  --main-3-filter: invert(56%) sepia(76%) saturate(943%) hue-rotate(181deg)
+    brightness(100%) contrast(94%);
 }
-div.yellow {
+.yellow {
   --main-1: #fff9db;
   --main-2: #ffec99;
   --main-3: #ffd43b;
   --main-4: #fab005;
   --main-5: #fab005;
+  --main-3-filter: invert(87%) sepia(72%) saturate(2720%) hue-rotate(323deg)
+    brightness(102%) contrast(101%);
 }
-div.pink {
+.pink {
   --main-1: #fff5f5;
   --main-2: #ffc9c9;
   --main-3: #ff8787;
   --main-4: #fa5252;
   --main-5: #e03131;
+  --main-3-filter: invert(82%) sepia(32%) saturate(4480%) hue-rotate(309deg)
+    brightness(111%) contrast(100%);
 }
-div.green {
+.green {
   --main-1: #ebfbee;
   --main-2: #b2f2bb;
   --main-3: #69db7c;
   --main-4: #40c057;
   --main-5: #2f9e44;
+  --main-3-filter: invert(100%) sepia(21%) saturate(5735%) hue-rotate(56deg)
+    brightness(91%) contrast(88%);
 }
 
 #root {

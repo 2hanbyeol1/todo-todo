@@ -17,11 +17,17 @@
 }
 .app .header-setting-img {
   width: 1.5rem;
+  transition: 1s;
+}
+.app .header-setting-img:hover {
+  transform: rotate(180deg);
 }
 
+/* main */
 .app main {
   width: 95%;
 }
+
 /* form */
 .app .todo-form {
   display: flex;
@@ -39,13 +45,17 @@
   padding: 0 1rem;
   box-sizing: border-box;
   border-radius: 0.5rem 0 0 0.5rem;
-  border: 0;
-  background-color: var(--gray-2);
+  border: 1.5px solid var(--gray-2);
+  background-color: var(--gray-1);
 }
 .app .todo-submit-btn {
   width: 4rem;
   border-radius: 0 0.5rem 0.5rem 0;
   background-color: var(--main-2);
+  transition: 0.5s;
+}
+.app .todo-submit-btn:hover {
+  background-color: var(--main-3);
 }
 
 /* section */
@@ -79,4 +89,31 @@
   flex-direction: column;
   gap: 0.7rem;
   margin: 0 0.7rem;
+}
+
+/* modal */
+.app .setting-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+.app .setting-content > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+.app .setting-content > div h4 {
+  font-size: 1.1rem;
+}
+.app .setting-content .theme-colors button {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--main-2);
+}
+.app .setting-content .setting-options {
+  display: flex;
+  gap: 1rem;
 }
