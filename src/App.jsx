@@ -47,10 +47,17 @@ const App = () => {
 
   const working_todos = todos.filter((todo) => !todo.isDone);
   const done_todos = todos.filter((todo) => todo.isDone);
+  const done_rate = todos.length === 0 ? 0 : done_todos.length / todos.length;
 
   return (
     <div className={`app ${theme.color}`}>
       <audio ref={audioRef} src={WaveAudio} loop></audio>
+      <div
+        style={{ transform: `translateY(${-75 * (1 - done_rate)}%)` }}
+        className="wave-wrap"
+      >
+        <div className="wave"></div>
+      </div>
       {settingModal ? (
         <Modal title="🔨 설정" closeModal={closeModal}>
           <div className="setting-content">
