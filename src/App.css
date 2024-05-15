@@ -6,13 +6,15 @@
 
 /* header */
 .app .header {
+  width: 100%;
+}
+.app .header-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
   padding: 1rem 0;
 }
-.app .header span {
+.app .header-top span {
   font-weight: bold;
 }
 .app .header-setting-img {

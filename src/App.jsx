@@ -57,19 +57,18 @@ const App = () => {
         setNewColorTheme={setNewColorTheme}
       />
       <header className="header">
-        <span style={{ width: "1.5rem" }}></span>
-        <span>{`📆 ${
-          new Date().getMonth() + 1
-        }월 ${new Date().getDate()}일`}</span>
-        <button onClick={showModal}>
-          <img
-            className="header-setting-img"
-            src={SettingImage}
-            alt="설정 버튼 이미지"
-          />
-        </button>
-      </header>
-      <main>
+        <div className="header-top">
+          <span>{`📆 ${
+            new Date().getMonth() + 1
+          }월 ${new Date().getDate()}일 - ${done_rate * 100}% 완료`}</span>
+          <button onClick={showModal}>
+            <img
+              className="header-setting-img"
+              src={SettingImage}
+              alt="설정 버튼 이미지"
+            />
+          </button>
+        </div>
         {/* input form */}
         <form className="todo-form" onSubmit={addTodo}>
           <input
@@ -79,7 +78,8 @@ const App = () => {
           />
           <button className="todo-submit-btn">등록</button>
         </form>
-        {/* working section */}
+      </header>
+      <main>
         <TodoSection
           title="✏️ working"
           todos={working_todos}
