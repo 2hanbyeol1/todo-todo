@@ -17,11 +17,10 @@ const App = () => {
   // todo
   const addTodo = (e) => {
     e.preventDefault();
+    const content = e.target.content.value;
+    if (!content) return;
     const id = todos.length > 0 ? todos[todos.length - 1].id + 1 : 0;
-    setTodos([
-      ...todos,
-      { id: id, content: e.target.content.value, isDone: false },
-    ]);
+    setTodos([...todos, { id: id, content: content, isDone: false }]);
     e.target.content.value = "";
   };
   const toggleTodo = (id) => {
@@ -60,7 +59,9 @@ const App = () => {
         <div className="header-top">
           <span>{`📆 ${
             new Date().getMonth() + 1
-          }월 ${new Date().getDate()}일 - ${done_rate * 100}% 완료`}</span>
+          }월 ${new Date().getDate()}일 - ${Math.floor(
+            done_rate * 100
+          )}% 완료`}</span>
           <button onClick={showModal}>
             <img
               className="header-setting-img"
