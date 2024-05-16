@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import "./App.css";
 import WaveAudio from "./assets/audio/wave.mp3";
 import SettingImage from "./assets/img/settings.png";
+import Input from "./components/input/Input";
 import Modal from "./components/modal/Modal";
 import Todo from "./components/todo/Todo";
 import Wave from "./components/wave/Wave";
@@ -17,11 +18,17 @@ const App = () => {
   // todo
   const addTodo = (e) => {
     e.preventDefault();
+    const title = e.target.title.value;
     const content = e.target.content.value;
-    if (!content) return;
+    if (!title || !content) return;
     const id = todos.length > 0 ? todos[todos.length - 1].id + 1 : 0;
-    setTodos([...todos, { id: id, content: content, isDone: false }]);
+    setTodos([
+      ...todos,
+      { id: id, title: title, content: content, isDone: false },
+    ]);
+    e.target.title.value = "";
     e.target.content.value = "";
+    e.target.title.focus();
   };
   const toggleTodo = (id) => {
     const newTodos = todos.map((todo) => ({
@@ -72,11 +79,8 @@ const App = () => {
         </div>
         {/* input form */}
         <form className="todo-form" onSubmit={addTodo}>
-          <input
-            className="todo-input"
-            name="content"
-            placeholder="할 일 목록"
-          />
+          <Input borderRadius="left" name="title" placeholder="할 일 제목" />
+          <Input name="content" placeholder="할 일 목록" />
           <button className="todo-submit-btn">등록</button>
         </form>
       </header>

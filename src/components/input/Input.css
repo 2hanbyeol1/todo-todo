@@ -1,0 +1,10 @@
+.input {
+  padding: 0 1rem;
+  box-sizing: border-box;
+  border: 1.5px solid var(--gray-2);
+  background-color: var(--gray-1);
+}
+
+.input.left {
+  border-radius: 0.5rem 0 0 0.5rem;
+}

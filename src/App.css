@@ -36,20 +36,15 @@
   display: flex;
   justify-content: space-between;
   width: 60%;
-  height: 2.5rem;
   margin: 0 auto;
 }
-.app .todo-input,
+.app .todo-form .input,
 .app .todo-submit-btn {
-  height: 100%;
+  height: 2.5rem;
 }
-.app .todo-input {
-  width: calc(99% - 4rem);
-  padding: 0 1rem;
-  box-sizing: border-box;
-  border-radius: 0.5rem 0 0 0.5rem;
-  border: 1.5px solid var(--gray-2);
-  background-color: var(--gray-1);
+
+.app .todo-form .input {
+  width: calc(49.5% - 2rem);
 }
 .app .todo-submit-btn {
   width: 4rem;

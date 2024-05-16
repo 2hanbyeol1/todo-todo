@@ -12,7 +12,11 @@ const Todo = ({ todo, toggleTodo, deleteTodo, checked }) => {
         checked={checked}
       />
       <label htmlFor={`check-btn-${todo.id}`}>
-        <span className="content">{todo.content}</span>
+        <span className="check"></span>
+        <div className="todo-info">
+          <span className="title">{todo.title}</span>
+          <span className="content">{todo.content}</span>
+        </div>
       </label>
       <button onClick={() => deleteTodo(todo.id)}>
         <img className="del-btn" src={XImage} alt="삭제 버튼 이미지" />
