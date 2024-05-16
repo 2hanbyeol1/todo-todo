@@ -8,7 +8,10 @@ const Todo = ({ todo, toggleTodo, deleteTodo, checked }) => {
         id={`check-btn-${todo.id}`}
         className="check-btn"
         type="checkbox"
-        onChange={() => toggleTodo(todo.id)}
+        onChange={() => {
+          toggleTodo(todo.id);
+          console.log("toggle");
+        }}
         checked={checked}
       />
       <label htmlFor={`check-btn-${todo.id}`}>

@@ -6,6 +6,7 @@ import Input from "./components/input/Input";
 import Modal from "./components/modal/Modal";
 import Todo from "./components/todo/Todo";
 import Wave from "./components/wave/Wave";
+import TAB from "./constants/tab";
 import { COLOR } from "./constants/theme";
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
   });
   const [todos, setTodos] = useState([]);
   const [settingModal, setSettingModal] = useState(false);
+  const [tab, setTab] = useState(TAB.WORKING);
 
   // todo
   const addTodo = (e) => {
@@ -50,13 +52,18 @@ const App = () => {
   const setNewColorTheme = (newColor) =>
     setTheme({ ...theme, color: newColor });
 
-  const working_todos = todos.filter((todo) => !todo.isDone);
-  const done_todos = todos.filter((todo) => todo.isDone);
-  const done_rate = todos.length === 0 ? 0 : done_todos.length / todos.length;
+  // tab
+  const changeTab = (newTab) => {
+    setTab(newTab);
+  };
+
+  const workingTodos = todos.filter((todo) => !todo.isDone);
+  const doneTodos = todos.filter((todo) => todo.isDone);
+  const doneRate = todos.length === 0 ? 0 : doneTodos.length / todos.length;
 
   return (
     <div className={`app ${theme.color}`}>
-      <Wave done_rate={done_rate} />
+      <Wave doneRate={doneRate} />
       <SettingModal
         visible={settingModal}
         closeModal={closeModal}
@@ -67,7 +74,7 @@ const App = () => {
           <span>{`📆 ${
             new Date().getMonth() + 1
           }월 ${new Date().getDate()}일 - ${Math.floor(
-            done_rate * 100
+            doneRate * 100
           )}% 완료`}</span>
           <button onClick={showModal}>
             <img
@@ -85,36 +92,38 @@ const App = () => {
         </form>
       </header>
       <main>
+        <div className="tab">
+          <button
+            className={tab === TAB.WORKING ? "active" : ""}
+            onClick={() => {
+              changeTab(TAB.WORKING);
+            }}
+          >
+            ✏️ {TAB.WORKING}
+          </button>
+          <button
+            className={tab === TAB.DONE ? "active" : ""}
+            onClick={() => {
+              changeTab(TAB.DONE);
+            }}
+          >
+            ✅ {TAB.DONE}
+          </button>
+        </div>
         <TodoSection
-          title="✏️ working"
-          todos={working_todos}
+          id={tab}
+          todos={tab === TAB.WORKING ? workingTodos : doneTodos}
           toggleTodo={toggleTodo}
           deleteTodo={deleteTodo}
-        />
-        <TodoSection
-          id="done-section"
-          title="✅ done"
-          todos={done_todos}
-          toggleTodo={toggleTodo}
-          deleteTodo={deleteTodo}
-          checked
         />
       </main>
     </div>
   );
 };
 
-const TodoSection = ({
-  id = "",
-  title,
-  todos,
-  toggleTodo,
-  deleteTodo,
-  checked,
-}) => {
+const TodoSection = ({ id = "", todos, toggleTodo, deleteTodo, checked }) => {
   return (
     <section id={id}>
-      <h3>{title}</h3>
       <div className="todo-list">
         {todos.length === 0 ? (
           <span>-</span>
