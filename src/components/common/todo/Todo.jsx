@@ -1,4 +1,4 @@
-import XImage from "../../assets/img/x.png";
+import XImage from "../../../assets/img/x.png";
 import "./Todo.css";
 
 const Todo = ({ todo, toggleTodo, deleteTodo, checked }) => {
@@ -10,7 +10,6 @@ const Todo = ({ todo, toggleTodo, deleteTodo, checked }) => {
         type="checkbox"
         onChange={() => {
           toggleTodo(todo.id);
-          console.log("toggle");
         }}
         checked={checked}
       />

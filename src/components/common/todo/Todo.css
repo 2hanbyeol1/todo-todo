@@ -32,7 +32,7 @@
   content: "";
   background-color: var(--main-3);
   border-color: var(--main-3);
-  background-image: url("../../assets/img/check.png");
+  background-image: url("../../../assets/img/check.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50%;
@@ -51,9 +51,6 @@
   background-color: var(--main-2);
   padding: 0.3rem 0.5rem;
   border-radius: 0.3rem;
-}
-
-.todo-container .content {
 }
 
 .todo-container .del-btn {

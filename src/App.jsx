@@ -1,11 +1,10 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import "./App.css";
-import WaveAudio from "./assets/audio/wave.mp3";
 import SettingImage from "./assets/img/settings.png";
-import Input from "./components/input/Input";
-import Modal from "./components/modal/Modal";
-import Todo from "./components/todo/Todo";
-import Wave from "./components/wave/Wave";
+import Input from "./components/common/input/Input";
+import Wave from "./components/common/wave/Wave";
+import SettingModal from "./components/setting/SettingModal";
+import TodoSection from "./components/todo/TodoSection";
 import TAB from "./constants/tab";
 import { COLOR } from "./constants/theme";
 
@@ -118,69 +117,6 @@ const App = () => {
         />
       </main>
     </div>
-  );
-};
-
-const TodoSection = ({ id = "", todos, toggleTodo, deleteTodo, checked }) => {
-  return (
-    <section id={id}>
-      <div className="todo-list">
-        {todos.length === 0 ? (
-          <span>-</span>
-        ) : (
-          todos.map((todo) => (
-            <Todo
-              key={todo.id}
-              todo={todo}
-              toggleTodo={toggleTodo}
-              deleteTodo={deleteTodo}
-              checked={checked}
-            />
-          ))
-        )}
-      </div>
-    </section>
-  );
-};
-
-const SettingModal = ({ visible, closeModal, setNewColorTheme }) => {
-  const audioRef = useRef();
-
-  // audio
-  const playAudio = () => audioRef.current.play();
-  const stopAudio = () => audioRef.current.pause();
-
-  return (
-    <>
-      <audio ref={audioRef} src={WaveAudio} loop></audio>
-      {visible ? (
-        <Modal title="🔨 설정" closeModal={closeModal}>
-          <div className="setting-content">
-            <div className="theme-sound">
-              <h4>배경 음악</h4>
-              <div className="setting-options">
-                <button onClick={playAudio}>ON</button>
-                <button onClick={stopAudio}>OFF</button>
-              </div>
-            </div>
-            <div className="theme-colors">
-              <h4>테마 색상</h4>
-              <div className="setting-options">
-                {Object.values(COLOR).map((c, i) => (
-                  <button
-                    key={i}
-                    className={c}
-                    onClick={() => setNewColorTheme(c)}
-                  ></button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </Modal>
-      ) : (
-        <></>
-      )}
-    </>
   );
 };
 

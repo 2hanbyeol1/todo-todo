@@ -1,9 +1,9 @@
 import "./Wave.css";
 
-const Wave = ({ done_rate }) => {
+const Wave = ({ doneRate }) => {
   return (
     <div
-      style={{ transform: `translateY(${-75 * (1 - done_rate)}%)` }}
+      style={{ transform: `translateY(${-75 * (1 - doneRate)}%)` }}
       className="wave-wrap"
     >
       <div className="wave"></div>
